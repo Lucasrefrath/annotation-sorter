@@ -1,0 +1,53 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>de.annotation.core</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Annotation Manager</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor>Lucas Hermes</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Sort all your Annotations when saving the file.
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable
+                displayName="Annotation Sorting"
+                instance="de.annotation.core.settings.presentation.AnnotationSortingAppSettingsConfigurable"
+        />
+    </extensions>
+
+    <actions>
+        <action
+                id="TestAction"
+                class="de.annotation.core.actions.TestAction"
+                text="Test"
+                description="Test how actions are triggered.">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+        <action id="SortClassAnnotations"
+                class="de.annotation.core.actions.SortClassAnnotationsAction"
+                text="Sort Class Annotations"
+                description="Sorts all class annotations by their length">
+            <!-- Windows/Linux: Ctrl+Alt+S -->
+            <keyboard-shortcut first-keystroke="ctrl alt S" keymap="$default"/>
+
+            <!-- macOS: Cmd+Alt+S -->
+            <keyboard-shortcut first-keystroke="meta alt S" keymap="Mac OS X"/>
+        </action>
+
+    </actions>
+</idea-plugin>

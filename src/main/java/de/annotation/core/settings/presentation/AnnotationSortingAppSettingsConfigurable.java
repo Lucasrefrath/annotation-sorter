@@ -1,8 +1,11 @@
 package de.annotation.core.settings.presentation;
 
 import com.intellij.openapi.options.Configurable;
+import com.intellij.ui.TitledSeparator;
+import com.intellij.util.ui.FormBuilder;
 import de.annotation.core.config.AnnotationSortingConstants;
-import de.annotation.core.settings.AnnotationSortingAppSettings;
+import de.annotation.core.settings.presentation.components.EnableSortingComponent;
+import de.annotation.core.settings.presentation.components.ExcludeAnnotationComponent;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +13,9 @@ import javax.swing.*;
 
 public class AnnotationSortingAppSettingsConfigurable implements Configurable {
 
-  private AnnotationSortingSettingsComponent component;
+  private ExcludeAnnotationComponent excludeAnnotationComponent;
+
+  private EnableSortingComponent enableSortingComponent;
 
   @Override
   public @Nls String getDisplayName() {
@@ -19,28 +24,40 @@ public class AnnotationSortingAppSettingsConfigurable implements Configurable {
 
   @Override
   public @Nullable JComponent createComponent() {
-    component = new AnnotationSortingSettingsComponent();
-    return component.getMainPanel();
+    enableSortingComponent = new EnableSortingComponent();
+    excludeAnnotationComponent = new ExcludeAnnotationComponent();
+
+    return FormBuilder.createFormBuilder()
+            .addComponent(new TitledSeparator("General"))
+            .addComponent(enableSortingComponent.toJComponent())
+            .addVerticalGap(10)
+            .addComponent(new TitledSeparator("Exclude Annotation"))
+            .addComponent(excludeAnnotationComponent.toJComponent())
+            .addComponentFillVertically(new JPanel(), 0)
+            .getPanel();
   }
 
   @Override
   public boolean isModified() {
-    AnnotationSortingAppSettings settings = AnnotationSortingAppSettings.getInstance();
-    return component.getOption() != settings.getState().isSortingEnabled();
+    return enableSortingComponent.isModified()
+            || excludeAnnotationComponent.isModified();
   }
 
   @Override
   public void apply() {
-    AnnotationSortingAppSettings.getInstance().getState().setSortingEnabled(component.getOption());
+    enableSortingComponent.apply();
+    excludeAnnotationComponent.apply();
   }
 
   @Override
   public void reset() {
-    component.setOption(AnnotationSortingAppSettings.getInstance().getState().isSortingEnabled());
+    enableSortingComponent.reset();
+    excludeAnnotationComponent.reset();
   }
 
   @Override
   public void disposeUIResources() {
-    component = null;
+    enableSortingComponent = null;
+    excludeAnnotationComponent = null;
   }
 }

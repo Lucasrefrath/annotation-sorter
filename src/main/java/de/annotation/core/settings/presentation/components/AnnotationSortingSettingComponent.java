@@ -6,8 +6,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
+/**
+ * Interface for all setting UI components to implement.
+ */
 public abstract class AnnotationSortingSettingComponent {
 
+  // Global PlugIn setting storage
   protected final @NotNull AnnotationSortingApplicationState settings = AnnotationSortingAppSettings.getInstance().getState();
 
   public abstract JComponent toJComponent();

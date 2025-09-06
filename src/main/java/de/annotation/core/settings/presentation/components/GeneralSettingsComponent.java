@@ -4,13 +4,19 @@ import com.intellij.util.ui.FormBuilder;
 
 import javax.swing.*;
 
-public class EnableSortingComponent extends AnnotationSortingSettingComponent {
+import static de.annotation.core.settings.presentation.config.SettingTextConstants.ENABLE_SORTING_SETTINGS_CHECKBOX_LABEL;
+import static de.annotation.core.settings.presentation.config.SettingTextConstants.ENABLE_SORTING_SETTINGS_CHECKBOX_TOOLTIP;
+
+/**
+ * Ui Component for the General tab.
+ */
+public class GeneralSettingsComponent extends AnnotationSortingSettingComponent {
 
   private final JCheckBox enableSortingCheckBox;
 
-  public EnableSortingComponent() {
-    enableSortingCheckBox = new JCheckBox("Sort Annotations");
-    enableSortingCheckBox.setToolTipText("Enables sorting of annotations.");
+  public GeneralSettingsComponent() {
+    enableSortingCheckBox = new JCheckBox(ENABLE_SORTING_SETTINGS_CHECKBOX_LABEL);
+    enableSortingCheckBox.setToolTipText(ENABLE_SORTING_SETTINGS_CHECKBOX_TOOLTIP);
   }
 
   @Override
@@ -34,6 +40,5 @@ public class EnableSortingComponent extends AnnotationSortingSettingComponent {
             .addComponent(enableSortingCheckBox)
             .getPanel();
   }
-
 
 }

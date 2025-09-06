@@ -3,61 +3,65 @@ package de.annotation.core.settings.presentation;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.ui.TitledSeparator;
 import com.intellij.util.ui.FormBuilder;
-import de.annotation.core.config.AnnotationSortingConstants;
-import de.annotation.core.settings.presentation.components.EnableSortingComponent;
-import de.annotation.core.settings.presentation.components.ExcludeAnnotationComponent;
+import de.annotation.core.settings.presentation.components.GeneralSettingsComponent;
+import de.annotation.core.settings.presentation.components.ExcludeAnnotationSettingsComponent;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
+import static de.annotation.core.settings.presentation.config.SettingTextConstants.*;
+
+/**
+ * Configurable holding all UI for PlugIn settings.
+ */
 public class AnnotationSortingAppSettingsConfigurable implements Configurable {
 
-  private ExcludeAnnotationComponent excludeAnnotationComponent;
+  private ExcludeAnnotationSettingsComponent excludeAnnotationSettingsComponent;
 
-  private EnableSortingComponent enableSortingComponent;
+  private GeneralSettingsComponent generalSettingsComponent;
 
   @Override
   public @Nls String getDisplayName() {
-    return AnnotationSortingConstants.SETTINGS_TITLE;
+    return SETTINGS_TITLE;
   }
 
   @Override
   public @Nullable JComponent createComponent() {
-    enableSortingComponent = new EnableSortingComponent();
-    excludeAnnotationComponent = new ExcludeAnnotationComponent();
+    generalSettingsComponent = new GeneralSettingsComponent();
+    excludeAnnotationSettingsComponent = new ExcludeAnnotationSettingsComponent();
 
     return FormBuilder.createFormBuilder()
-            .addComponent(new TitledSeparator("General"))
-            .addComponent(enableSortingComponent.toJComponent())
+            .addComponent(new TitledSeparator(GENERAL_SETTINGS_HEADING))
+            .addComponent(generalSettingsComponent.toJComponent())
             .addVerticalGap(10)
-            .addComponent(new TitledSeparator("Exclude Annotation"))
-            .addComponent(excludeAnnotationComponent.toJComponent())
+            .addComponent(new TitledSeparator(EXCLUDE_ANNOTATIONS_SETTINGS_HEADING))
+            .addComponent(excludeAnnotationSettingsComponent.toJComponent())
             .addComponentFillVertically(new JPanel(), 0)
             .getPanel();
   }
 
   @Override
   public boolean isModified() {
-    return enableSortingComponent.isModified()
-            || excludeAnnotationComponent.isModified();
+    return generalSettingsComponent.isModified()
+            || excludeAnnotationSettingsComponent.isModified();
   }
 
   @Override
   public void apply() {
-    enableSortingComponent.apply();
-    excludeAnnotationComponent.apply();
+    generalSettingsComponent.apply();
+    excludeAnnotationSettingsComponent.apply();
   }
 
   @Override
   public void reset() {
-    enableSortingComponent.reset();
-    excludeAnnotationComponent.reset();
+    generalSettingsComponent.reset();
+    excludeAnnotationSettingsComponent.reset();
   }
 
   @Override
   public void disposeUIResources() {
-    enableSortingComponent = null;
-    excludeAnnotationComponent = null;
+    generalSettingsComponent = null;
+    excludeAnnotationSettingsComponent = null;
   }
 }

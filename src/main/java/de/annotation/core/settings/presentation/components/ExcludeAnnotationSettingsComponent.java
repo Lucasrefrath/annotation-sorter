@@ -2,8 +2,10 @@ package de.annotation.core.settings.presentation.components;
 
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ScrollPaneFactory;
+import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.FormBuilder;
+import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -11,7 +13,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExcludeAnnotationComponent extends AnnotationSortingSettingComponent {
+import static de.annotation.core.settings.presentation.config.SettingTextConstants.*;
+
+/**
+ * UI component for exclude annotation settings.
+ */
+public class ExcludeAnnotationSettingsComponent extends AnnotationSortingSettingComponent {
 
   private final CollectionListModel<String> list;
 
@@ -19,26 +26,34 @@ public class ExcludeAnnotationComponent extends AnnotationSortingSettingComponen
 
   private final JScrollPane scrollPane;
 
-  public ExcludeAnnotationComponent() {
+  public ExcludeAnnotationSettingsComponent() {
     list = new CollectionListModel<>();
     listComponent = new JBList<>(list);
 
-    listComponent.setEmptyText("No Annotations to exclude. Add one with the button below.");
+    listComponent.setEmptyText(EXCLUDE_ANNOTATION_SETTINGS_EMPTY_TEXT);
 
     scrollPane = ScrollPaneFactory.createScrollPane(listComponent);
     scrollPane.setPreferredSize(new Dimension(250, 300));
   }
 
+  /**
+   * Create buttongroup for interacting with exclusion list.
+   *
+   * @return buttongroup as JComponent
+   */
   private @NotNull JPanel getActionButtonGroup() {
     JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    JButton addButton = new JButton("Add");
-    JButton removeButton = new JButton("Remove");
+    JButton addButton = new JButton(EXCLUDE_ANNOTATION_SETTINGS_ADD_BUTTON_LABEL);
+    JButton removeButton = new JButton(EXCLUDE_ANNOTATION_SETTINGS_REMOVE_BUTTON_LABEL);
 
-    addButton.setToolTipText("Add new Annotation to exclude from sorting.");
-    removeButton.setToolTipText("Remove Annotation from being excluded from sorting.");
+    addButton.setToolTipText(EXCLUDE_ANNOTATION_SETTINGS_ADD_BUTTON_TOOLTIP);
+    removeButton.setToolTipText(EXCLUDE_ANNOTATION_SETTINGS_REMOVE_BUTTON_TOOLTIP);
 
     addButton.addActionListener(e -> {
-      String value = JOptionPane.showInputDialog("Enter annotation:", "@");
+      String value = JOptionPane.showInputDialog(
+              EXCLUDE_ANNOTATION_SETTINGS_ADD_DIALOG_HEADING,
+              EXCLUDE_ANNOTATION_SETTINGS_ANNOTATION_PREFIX
+      );
       if (value != null && !value.isBlank()) {
         list.add(modifyString(value));
       }
@@ -59,8 +74,8 @@ public class ExcludeAnnotationComponent extends AnnotationSortingSettingComponen
   private String modifyString(String s) {
     String result = s.trim();
 
-    if (!result.startsWith("@")) {
-      result = "@" + result;
+    if (!result.startsWith(EXCLUDE_ANNOTATION_SETTINGS_ANNOTATION_PREFIX)) {
+      result = EXCLUDE_ANNOTATION_SETTINGS_ANNOTATION_PREFIX + result;
     }
 
     result = result.replaceAll(" ", "");
@@ -83,7 +98,11 @@ public class ExcludeAnnotationComponent extends AnnotationSortingSettingComponen
 
   @Override
   public JComponent toJComponent() {
+    JBLabel description = new JBLabel(EXCLUDE_ANNOTATION_SETTINGS_SUMMARY);
+    description.setForeground(UIUtil.getContextHelpForeground());
+
     return FormBuilder.createFormBuilder()
+            .addComponent(description)
             .addComponent(scrollPane)
             .addComponentToRightColumn(getActionButtonGroup())
             .getPanel();

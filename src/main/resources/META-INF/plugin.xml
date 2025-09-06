@@ -31,13 +31,6 @@
     </extensions>
 
     <actions>
-        <action
-                id="TestAction"
-                class="de.annotation.core.actions.TestAction"
-                text="Test"
-                description="Test how actions are triggered.">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
         <action id="SortClassAnnotations"
                 class="de.annotation.core.actions.SortClassAnnotationsAction"
                 text="Sort Class Annotations"
@@ -48,6 +41,5 @@
             <!-- macOS: Cmd+Alt+S -->
             <keyboard-shortcut first-keystroke="meta alt S" keymap="Mac OS X"/>
         </action>
-
     </actions>
 </idea-plugin>

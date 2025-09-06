@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Service to handle sorting of Annotations.
@@ -27,16 +26,6 @@ public class AnnotationSortingService {
   }
 
   /**
-   * Get clean Name of annotation.
-   * @param annotation annotation to get name of.
-   * @return Name of annotation
-   */
-  private String getAnnotationName(PsiAnnotation annotation) {
-    String[] qualifiedName = Objects.requireNonNull(annotation.getQualifiedName()).split("\\.");
-    return "@" + qualifiedName[qualifiedName.length - 1];
-  }
-
-  /**
    * Check if a group of annotations contains one or more of the excluded annotations.
    *
    * @param annotations annotationgroup to check
@@ -45,7 +34,7 @@ public class AnnotationSortingService {
   private boolean groupContainsExcludedAnnotations(List<PsiAnnotation> annotations) {
     return annotations.stream()
             .anyMatch(psiAnnotation ->
-                    settings.getExcludedAnnotations().contains(getAnnotationName(psiAnnotation))
+                    settings.getExcludedAnnotations().contains(psiAnnotation.getQualifiedName())
             );
   }
 

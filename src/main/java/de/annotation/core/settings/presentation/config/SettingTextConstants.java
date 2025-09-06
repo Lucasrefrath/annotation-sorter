@@ -11,11 +11,10 @@ public class SettingTextConstants {
   public static final String GENERAL_SETTINGS_HEADING = "General";
   public static final String EXCLUDE_ANNOTATIONS_SETTINGS_HEADING = "Exclude Annotations";
 
-  public static final String EXCLUDE_ANNOTATION_SETTINGS_ADD_DIALOG_HEADING = "Enter Annotation:";
+  public static final String EXCLUDE_ANNOTATION_SETTINGS_ADD_DIALOG_HEADING = "Enter Annotation Package:";
 
 
   // EXCLUDE ANNOTATIONS //
-  public static final String EXCLUDE_ANNOTATION_SETTINGS_SUMMARY = "If a class or method is annotated with one or more of the excluded annotations, sorting will be skipped.";
   public static final String EXCLUDE_ANNOTATION_SETTINGS_EMPTY_TEXT = "No Annotations to exclude. Add one with the button below.";
 
   public static final String EXCLUDE_ANNOTATION_SETTINGS_ADD_BUTTON_LABEL = "Add";
@@ -23,8 +22,6 @@ public class SettingTextConstants {
 
   public static final String EXCLUDE_ANNOTATION_SETTINGS_REMOVE_BUTTON_LABEL = "Remove";
   public static final String EXCLUDE_ANNOTATION_SETTINGS_REMOVE_BUTTON_TOOLTIP = "Remove Annotation from being excluded from sorting.";
-
-  public static final String EXCLUDE_ANNOTATION_SETTINGS_ANNOTATION_PREFIX = "@";
 
 
   // ENABLE SORTING //

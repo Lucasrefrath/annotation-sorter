@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 @Service(Service.Level.APP)
 @State(
-        name = "AppSettings",
-        storages = @Storage("AppSettings.xml")
+        name = "AnnotationSortingPlugInSettings",
+        storages = @Storage("AnnotationSortingPlugInSettings.xml")
 )
 public final class AnnotationSortingAppSettings implements PersistentStateComponent<AnnotationSortingApplicationState> {
 

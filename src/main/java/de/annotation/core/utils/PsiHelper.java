@@ -10,6 +10,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 
 import java.util.Optional;
 
+/**
+ * Helperclass to retrieve PSI-Elements.
+ */
 public class PsiHelper {
 
   public static Optional<PsiClass> getPsiClass(AnActionEvent event) {

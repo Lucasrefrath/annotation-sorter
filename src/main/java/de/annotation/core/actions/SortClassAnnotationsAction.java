@@ -5,16 +5,15 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiClass;
 import de.annotation.core.settings.AnnotationSortingAppSettings;
 import de.annotation.core.settings.AnnotationSortingApplicationState;
 import de.annotation.core.sorting.AnnotationSortingService;
+import de.annotation.core.utils.PsiHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Optional;
-
-import static de.annotation.core.utils.PsiHelper.getPsiClass;
+import java.util.List;
 
 public class SortClassAnnotationsAction extends AnAction {
 
@@ -29,20 +28,21 @@ public class SortClassAnnotationsAction extends AnAction {
     }
 
     Project project = e.getProject();
-    Optional<PsiClass> psiClassOptional = getPsiClass(e);
-
-    if (psiClassOptional.isEmpty() || project == null) {
-      return;
-    }
-
-    PsiClass psiClass = psiClassOptional.get();
+    List<PsiClass> psiClasses = PsiHelper.getPsiClassesByEvent(e);
 
     WriteCommandAction.runWriteCommandAction(project, () -> {
-      sortingService.rearrangeAllClassLevelAnnotations(project, psiClass);
-
-      Arrays.stream(psiClass.getMethods())
-              .forEach(psiMethod -> sortingService.rearrangeAllMethodLevelAnnotations(project, psiMethod));
+      psiClasses.forEach(psiClass -> handleClass(project, psiClass));
     });
+  }
+
+  private void handleClass(Project project, PsiClass psiClass) {
+    sortingService.rearrangeAllClassLevelAnnotations(project, psiClass);
+
+    Arrays.stream(psiClass.getMethods())
+            .forEach(psiMethod -> sortingService.rearrangeAllMethodLevelAnnotations(project, psiMethod));
+
+    Arrays.stream(psiClass.getAllInnerClasses())
+            .forEach(innerClass -> handleClass(project, innerClass));
   }
 
 }

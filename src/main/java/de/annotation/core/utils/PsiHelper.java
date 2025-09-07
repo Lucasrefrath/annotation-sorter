@@ -2,33 +2,28 @@ package de.annotation.core.utils;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.PsiJavaFile;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helperclass to retrieve PSI-Elements.
  */
 public class PsiHelper {
 
-  public static Optional<PsiClass> getPsiClass(AnActionEvent event) {
-    Editor editor = event.getData(CommonDataKeys.EDITOR);
+  public static List<PsiClass> getPsiClassesByEvent(AnActionEvent event) {
     PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
 
-    if (editor == null || psiFile == null) {
-      return Optional.empty();
+    if (psiFile instanceof PsiJavaFile javaFile) {
+      return Arrays.asList(javaFile.getClasses());
     }
 
-    final int offset = editor.getCaretModel().getOffset();
-    PsiElement elementAtCaret = psiFile.findElementAt(offset);
-
-    return Optional.ofNullable(
-            PsiTreeUtil.getParentOfType(elementAtCaret, PsiClass.class)
-    );
+    return List.of();
   }
+
+
 
 }

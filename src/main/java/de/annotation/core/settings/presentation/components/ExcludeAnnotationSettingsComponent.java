@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static de.annotation.core.settings.presentation.config.SettingTextConstants.*;
+import static de.annotation.core.config.SettingTextConstants.*;
 
 /**
  * UI component for exclude annotation settings.

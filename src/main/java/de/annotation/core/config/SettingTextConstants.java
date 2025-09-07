@@ -1,4 +1,4 @@
-package de.annotation.core.settings.presentation.config;
+package de.annotation.core.config;
 
 /**
  * All text shown in PlugIn settings.

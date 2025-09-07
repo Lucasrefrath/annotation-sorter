@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static de.annotation.core.settings.presentation.config.SettingTextConstants.*;
+import static de.annotation.core.config.SettingTextConstants.*;
 
 /**
  * Configurable holding all UI for PlugIn settings.

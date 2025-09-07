@@ -4,8 +4,8 @@ import com.intellij.util.ui.FormBuilder;
 
 import javax.swing.*;
 
-import static de.annotation.core.settings.presentation.config.SettingTextConstants.ENABLE_SORTING_SETTINGS_CHECKBOX_LABEL;
-import static de.annotation.core.settings.presentation.config.SettingTextConstants.ENABLE_SORTING_SETTINGS_CHECKBOX_TOOLTIP;
+import static de.annotation.core.config.SettingTextConstants.ENABLE_SORTING_SETTINGS_CHECKBOX_LABEL;
+import static de.annotation.core.config.SettingTextConstants.ENABLE_SORTING_SETTINGS_CHECKBOX_TOOLTIP;
 
 /**
  * Ui Component for the General tab.

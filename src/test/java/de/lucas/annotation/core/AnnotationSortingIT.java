@@ -141,7 +141,44 @@ public class AnnotationSortingIT extends BasePlatformTestCase {
 
         performSortingAction();
 
-    myFixture.checkResult(expected);
-  }
+        myFixture.checkResult(expected);
+    }
+
+    public void testSortOnReformatCode() {
+        AnnotationSortingAppSettings.getInstance().getState().setSortingEnabled(true);
+        AnnotationSortingAppSettings.getInstance().getState().setExecuteOnReformatCode(true);
+        AnnotationSortingAppSettings.getInstance().getState().setExcludedAnnotations(List.of());
+
+        String before = """
+                @javax.annotation.processing.Generated("Test Mid")
+                @javax.annotation.processing.Generated("Test Long")
+                @javax.annotation.processing.Generated("Test")
+                public class TestClass {
+                
+                    @javax.annotation.processing.Generated("Test")
+                    @java.lang.Deprecated
+                    void testMethod() {}
+                }
+                """;
+
+        String expected = """
+                @javax.annotation.processing.Generated("Test")
+                @javax.annotation.processing.Generated("Test Mid")
+                @javax.annotation.processing.Generated("Test Long")
+                public class TestClass {
+                
+                    @java.lang.Deprecated
+                    @javax.annotation.processing.Generated("Test")
+                    void testMethod() {
+                    }
+                }
+                """;
+
+        myFixture.configureByText("TestClass.java", before);
+
+        performReformatCodeAction();
+
+        myFixture.checkResult(expected);
+    }
 
 }

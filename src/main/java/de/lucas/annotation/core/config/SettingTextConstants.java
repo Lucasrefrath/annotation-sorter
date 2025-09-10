@@ -28,4 +28,8 @@ public class SettingTextConstants {
     public static final String ENABLE_SORTING_SETTINGS_CHECKBOX_LABEL = "Sort Annotations";
     public static final String ENABLE_SORTING_SETTINGS_CHECKBOX_TOOLTIP = "Enables sorting of annotations.";
 
+    // PERFORM ON REFORMAT CODE //
+    public static final String PERFORM_ON_REFORMAT_SETTINGS_CHECKBOX_LABEL = "Perform Sorting on 'Reformat Code'";
+    public static final String PERFORM_ON_REFORMAT_SETTINGS_CHECKBOX_TOOLTIP = "Sorts Annotations when using the 'Reformat Code' shortcut.";
+
 }

@@ -19,4 +19,7 @@ public class AnnotationSortingApplicationState {
     // Tag if sorting is globally enabled.
     private boolean sortingEnabled = true;
 
+    // Tag if Sorting action should be executed when reformatting code is called.
+    private boolean executeOnReformatCode = true;
+
 }

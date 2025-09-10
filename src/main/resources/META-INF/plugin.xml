@@ -17,6 +17,7 @@
                 displayName="Annotation Sorting"
                 instance="de.lucas.annotation.core.settings.presentation.AnnotationSortingAppSettingsConfigurable"
         />
+        <postStartupActivity implementation="de.lucas.annotation.core.actions.ReformatCodeActionListener" />
     </extensions>
 
     <actions>
@@ -24,11 +25,6 @@
                 class="de.lucas.annotation.core.actions.SortClassAnnotationsAction"
                 text="Sort Annotations"
                 description="Sorts all class annotations by their length">
-            <!-- Windows/Linux: Ctrl+Alt+S -->
-            <keyboard-shortcut first-keystroke="ctrl alt S" keymap="$default"/>
-
-            <!-- macOS: Cmd+Alt+S -->
-            <keyboard-shortcut first-keystroke="meta alt S" keymap="Mac OS X"/>
         </action>
     </actions>
 </idea-plugin>

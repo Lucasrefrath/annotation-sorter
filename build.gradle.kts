@@ -6,8 +6,8 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.5.0"
 }
 
-group = "de.annotation"
-version = "1.0-SNAPSHOT"
+group = "de.lucas.annotation"
+version = "0.1.2"
 
 repositories {
     mavenCentral()

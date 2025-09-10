@@ -1,4 +1,4 @@
-package de.annotation.core.settings;
+package de.lucas.annotation.core.settings;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -14,22 +14,22 @@ import org.jetbrains.annotations.NotNull;
 )
 public final class AnnotationSortingAppSettings implements PersistentStateComponent<AnnotationSortingApplicationState> {
 
-  private AnnotationSortingApplicationState state = new AnnotationSortingApplicationState();
+    private AnnotationSortingApplicationState state = new AnnotationSortingApplicationState();
 
-  public static AnnotationSortingAppSettings getInstance() {
-    return ApplicationManager
-            .getApplication()
-            .getService(AnnotationSortingAppSettings.class);
-  }
+    public static AnnotationSortingAppSettings getInstance() {
+        return ApplicationManager
+                .getApplication()
+                .getService(AnnotationSortingAppSettings.class);
+    }
 
-  public @NotNull AnnotationSortingApplicationState getState() {
-    return state;
-  }
+    public @NotNull AnnotationSortingApplicationState getState() {
+        return state;
+    }
 
-  @Override
-  public void loadState(@NotNull AnnotationSortingApplicationState state) {
-    this.state = state;
-  }
+    @Override
+    public void loadState(@NotNull AnnotationSortingApplicationState state) {
+        this.state = state;
+    }
 
 }
 

@@ -1,4 +1,4 @@
-package de.annotation.core.utils;
+package de.lucas.annotation.core.utils;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -14,16 +14,14 @@ import java.util.List;
  */
 public class PsiHelper {
 
-  public static List<PsiClass> getPsiClassesByEvent(AnActionEvent event) {
-    PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
+    public static List<PsiClass> getPsiClassesByEvent(AnActionEvent event) {
+        PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
 
-    if (psiFile instanceof PsiJavaFile javaFile) {
-      return Arrays.asList(javaFile.getClasses());
+        if (psiFile instanceof PsiJavaFile javaFile) {
+            return Arrays.asList(javaFile.getClasses());
+        }
+
+        return List.of();
     }
-
-    return List.of();
-  }
-
-
 
 }

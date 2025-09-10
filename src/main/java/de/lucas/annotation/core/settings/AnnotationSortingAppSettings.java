@@ -7,6 +7,9 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * PersistentStateComponent implementation to access {@link AnnotationSortingApplicationState} as Singleton.
+ */
 @Service(Service.Level.APP)
 @State(
         name = "AnnotationSortingPlugInSettings",

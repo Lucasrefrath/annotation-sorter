@@ -15,13 +15,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Intellij-Platform Event that performs the annotationsorting when triggered.
+ */
 public class SortClassAnnotationsAction extends AnAction {
 
     private final AnnotationSortingService sortingService = new AnnotationSortingService();
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        System.out.println("Performing annotation sort action");
         AnnotationSortingApplicationState settings = AnnotationSortingAppSettings.getInstance().getState();
 
         if (!settings.isSortingEnabled()) {
@@ -43,6 +45,12 @@ public class SortClassAnnotationsAction extends AnAction {
         });
     }
 
+    /**
+     * Workflow regarding sorting for one class.
+     *
+     * @param project the project located in
+     * @param psiClass the PsiClass element to execute the workflow for
+     */
     private void handleClassAndMethods(Project project, PsiClass psiClass) {
         sortingService.rearrangeAllClassLevelAnnotations(project, psiClass);
 

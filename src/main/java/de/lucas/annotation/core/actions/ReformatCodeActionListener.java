@@ -36,7 +36,6 @@ public class ReformatCodeActionListener implements ProjectActivity {
                                                      @NotNull AnActionResult result) {
                         String actionId = ActionManager.getInstance().getId(action);
                         if ("ReformatCode".equals(actionId)) {
-                            System.out.println("Reformat code action started");
                             performAnnotationSortingAction(event);
                         }
                     }

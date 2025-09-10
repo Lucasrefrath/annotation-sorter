@@ -6,8 +6,8 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.5.0"
 }
 
-group = "de.annotation"
-version = "1.0-SNAPSHOT"
+group = "de.lucas.annotation"
+version = "0.1.2"
 
 repositories {
     mavenCentral()
@@ -22,6 +22,8 @@ dependencies {
 
     testCompileOnly("org.projectlombok:lombok:1.18.38")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+
+    testImplementation("junit:junit:4.13.2")
 
     intellijPlatform {
         create("IC", "2025.1")
@@ -50,5 +52,8 @@ tasks {
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         compilerOptions.jvmTarget.set(JvmTarget.JVM_20)
+    }
+    test {
+        useJUnit()
     }
 }

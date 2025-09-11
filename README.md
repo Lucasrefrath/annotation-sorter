@@ -39,7 +39,20 @@ When accessing the settings in a project context, a menu will scan all project d
 
 
 ## Local Build
-Coming soon...
+> **Java 21 is required!**
+
+After cloning the repository, you can test the Plugin locally by running:
+```
+./gradlew build
+./gradlew runIde
+```
+
+To produce a packed zip run:
+```
+./gradlew buildPlugin
+```
 
 ## License
-This repository is licensed under the MIT License. You may not use it except in compliance with the License. You may obtain a copy of the License at [https://opensource.org/license/mit](https://opensource.org/license/mit).
+This repository is licensed under the MIT License.
+You may not use it except in compliance with the License. 
+You may obtain a copy of the License at [https://opensource.org/license/mit](https://opensource.org/license/mit).
